@@ -17,14 +17,13 @@
 <body>
   <div class="min-h-full flex flex-center container">
      <div id="wrapper" class="wrapper" data-counter="0"></div>
-  </div
+  </div>
     <script>
       console.clear();
 const NAMES = [
     "张三",
     "李四",
 ];
-console.log(NAMES.length);
 const wrapperEl = document.getElementById("wrapper");
 const GAP = 5;
 const MIN_FONT_SIZE = 10;
@@ -35,7 +34,6 @@ let initalLoad = true;
 // thanks for https://codepen.io/cbolson/pen/raBBgeG
 function loadNames() {
     const wrapperWidth = wrapper.offsetWidth; 
-    // Only re-draw if the wrapper size itself has changed
     if (wrapperWidth !== currentWidth) {
         wrapperEl.innerHTML = "";
      
@@ -62,16 +60,14 @@ function loadNames() {
     }
     if(wrapperEl.dataset.counter!="500")wrapperEl.dataset.counter=500;
   
-initalLoad = false;
+    initalLoad = false;
 }
 
-// wrapper resize observer
 const resizeObserver = new ResizeObserver(() => {
     loadNames();
 });
 resizeObserver.observe(wrapperEl);
 
-// Initial call - bit of a hack but I found that it needed a slight timeout to load the numbers properly
 document.addEventListener('DOMContentLoaded', function () {
   loadNames()
 });
