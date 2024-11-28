@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  
+  <!-- 名称 -->
+  <title>鹏哥哥</title>
+  <!-- 简介 -->
+  <meta name="description" content="Hi，我是 鹏哥哥，是一个程序员，会一点 PHP / Golang / Vue / 微信小程序。">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="min-h-full flex flex-center container">
+     <div id="wrapper" class="wrapper" data-counter="0"></div>
+  </div
+    <script>
+      console.clear();
+const NAMES = [
+    "张三",
+    "李四",
+];
+console.log(NAMES.length);
+const wrapperEl = document.getElementById("wrapper");
+const GAP = 5;
+const MIN_FONT_SIZE = 10;
+const WORD_DELAY = 3;
+
+let currentWidth = Infinity;
+let initalLoad = true;
+// thanks for https://codepen.io/cbolson/pen/raBBgeG
+function loadNames() {
+    const wrapperWidth = wrapper.offsetWidth; 
+    // Only re-draw if the wrapper size itself has changed
+    if (wrapperWidth !== currentWidth) {
+        wrapperEl.innerHTML = "";
+     
+        const fontSize = MIN_FONT_SIZE;
+
+        NAMES.forEach((name, i) => {
+            const span = document.createElement("span");
+            span.textContent = name;
+            span.style.fontSize = `${fontSize}px`;
+            if (initalLoad) {
+                const delay = (i * WORD_DELAY) + 'ms'; 
+                span.style.transitionDelay = delay;
+                span.addEventListener("transitionend", () => {
+                    span.style.transitionDelay = '0ms';
+                    wrapperEl.dataset.counter = String(i + 1).padStart(3, '0');
+                });
+            }
+            wrapperEl.appendChild(span);
+            span.addEventListener("hover", () => {
+              wrapperEl.dataset.counter = String(i + 1).padStart(3, '0');
+          })
+        });
+        currentWidth = wrapperWidth;
+    }
+    if(wrapperEl.dataset.counter!="500")wrapperEl.dataset.counter=500;
+  
+initalLoad = false;
+}
+
+// wrapper resize observer
+const resizeObserver = new ResizeObserver(() => {
+    loadNames();
+});
+resizeObserver.observe(wrapperEl);
+
+// Initial call - bit of a hack but I found that it needed a slight timeout to load the numbers properly
+document.addEventListener('DOMContentLoaded', function () {
+  loadNames()
+});
+    </script>
+</body>
+
+</html>
