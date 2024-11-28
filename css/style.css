@@ -1,0 +1,168 @@
+    @import url(https://fonts.bunny.net/css?family=gloria-hallelujah:400|roboto-condensed:300,600);
+* {
+  box-sizing: border-box;
+}
+:root {
+  --clr-bg: #011920;
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@property --color {
+  syntax: "<color>";
+  initial-value: blue;
+  inherits: false;
+}
+body {
+  background: var(--clr-bg);
+  color: white;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-family: "Roboto Condensed", sans-serif;
+  padding: 1rem;
+}
+.wrapper {
+  --clr-stroke: rgb(70, 130, 180);
+  --clr-primary: rgb(70, 130, 180);
+  --clr-secondary: rgb(219, 39, 119);
+  --border-thickness: 1px;
+  --padding: 2rem;
+  --ani-speed: 6s;
+
+  position: relative;
+  width: min(100%, 750px);
+  min-height: 733px;
+  margin-inline: auto;
+  padding: clamp(1rem, 3.5vw, 3.5rem);
+  pointer-events: none;
+  border: var(--border-thickness) solid rgba(255 255 255 / 0.05);
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
+  line-height: 0.75;
+  
+  /*transition: height 300ms ease-in-out;*/
+}
+.wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  border: 15px solid transparent;
+  z-index: -2;
+  border-radius: 5px;
+  filter: blur(20px);
+/*  opacity: .5;*/
+  background: linear-gradient(var(--clr-bg) 0 0) padding-box,
+    conic-gradient(
+        from var(--angle),
+        var(--clr-secondary),
+        var(--clr-primary),
+      rgb(175, 208, 84),
+        var(--clr-secondary)
+      )
+      border-box;
+  animation: neon-rotate var(--ani-speed) linear infinite;
+}
+
+
+.wrapper::after {
+  content: attr(data-counter);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(10rem, 40vw - 1rem, 20rem);
+  font-weight: 800;
+  background-image: linear-gradient(
+    to right,
+    rgba(70 130 180 / 0.25),
+    rgba(175 208 84 / 0.25),
+    rgba(219 39 119 / 0.25)
+  );
+  color: transparent;
+  background-clip: text;
+  transition: 
+    scale 2s ease-in-out,
+    opacity 2s ease-in-out;
+  scale: 1;
+  opacity: 1;
+  z-index: -1;
+  pointer-events: none;
+  transform-origin: top left;
+  
+  @starting-style {
+    opacity: 0;
+    scale: .1;
+  }
+}
+
+
+@keyframes neon-rotate {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+.wrapper > span {
+  position: relative;
+  pointer-events: auto;
+  /*white-space: nowrap;*/
+  transition: 300ms ease-in-out;
+  opacity: 0.75;
+  scale: 1;
+  translate: 0;
+  text-transform: capitalize;
+  isolation: isolate;
+
+  @starting-style {
+    scale: 0;
+    opacity: 0;
+  }
+  transition: opacity 300ms ease-in-out, scale 300ms ease-in-out,
+    translate 300ms ease-in-out;
+  /*outline: 1px dashed red;*/
+}
+.wrapper > span::after {
+  content: "👍Thanks";
+  font-family: "Gloria Hallelujah", handwriting;
+  font-weight: 600;
+  position: absolute;
+  left: 50%;
+  top: 0.75rem;
+  transform: translateX(-50%);
+  width: 200px;
+  color: var(--clr-secondary);
+  z-index: 10;
+  word-wrap: nowrap;
+  break-inside: avoid;
+  text-align: center;
+  transition: all 300ms ease-in-out;
+  opacity: 0;
+  translate: 0 10px;
+  z-index: 2;
+}
+.wrapper:has(span:hover) span:not(:hover) {
+  /*scale: .85;*/
+  opacity: 0.5;
+  filter: blur(1px);
+}
+.wrapper > span:hover {
+  scale: 3;
+  z-index: 99;
+}
+.wrapper > span:hover::after {
+  opacity: 1;
+  translate: 0;
+  transition-delay: 150ms;
+  font-size: 0.5rem;
+}
