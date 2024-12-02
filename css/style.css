@@ -151,16 +151,16 @@ body {
   translate: 0 10px;
   z-index: 2;
 }
-.wrapper:has(span:active) span:not(:active) {
+.wrapper:has(span:hove) span:not(:hove) {
   /*scale: .85;*/
   opacity: 0.5;
   filter: blur(1px);
 }
-.wrapper > span:active {
+.wrapper > span:hove {
   scale: 3;
   z-index: 99;
 }
-.wrapper > span:active::after {
+.wrapper > span:hove::after {
   opacity: 1;
   translate: 0;
   transition-delay: 150ms;
