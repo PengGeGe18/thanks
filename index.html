@@ -55,14 +55,6 @@ function loadNames() {
             span.addEventListener("hover", () => {
               wrapperEl.dataset.counter = String(i + 1).padStart(3, '0');
           })
-
-          span.addEventListener('touchstart', function(e){
-              this.classList.add('hover');
-          });
-           
-          span.addEventListener('touchend', function(e){
-              this.classList.remove('hover');
-          });
         });
         currentWidth = wrapperWidth;
     }
