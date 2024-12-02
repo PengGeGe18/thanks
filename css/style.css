@@ -151,27 +151,16 @@ body {
   translate: 0 10px;
   z-index: 2;
 }
-.wrapper:has(span:hover) span:not(:hover) {
+.wrapper:has(span:active) span:not(:active) {
   /*scale: .85;*/
   opacity: 0.5;
   filter: blur(1px);
 }
-.wrapper > span:hover {
+.wrapper > span:active {
   scale: 3;
   z-index: 99;
 }
-.wrapper > span:hover::after {
-  opacity: 1;
-  translate: 0;
-  transition-delay: 150ms;
-  font-size: 0.5rem;
-}
-
-.wrapper .hover {
-  scale: 3;
-  z-index: 99;
-}
-.wrapper .hover::after {
+.wrapper > span:active::after {
   opacity: 1;
   translate: 0;
   transition-delay: 150ms;
