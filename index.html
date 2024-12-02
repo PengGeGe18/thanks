@@ -52,7 +52,7 @@ function loadNames() {
                 });
             }
             wrapperEl.appendChild(span);
-            span.addEventListener("hover", () => {
+            span.addEventListener("active", () => {
               wrapperEl.dataset.counter = String(i + 1).padStart(3, '0');
           })
         });
