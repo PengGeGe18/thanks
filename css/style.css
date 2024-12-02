@@ -166,3 +166,7 @@ body {
   transition-delay: 150ms;
   font-size: 0.5rem;
 }
+
+.hover-element:hover {
+  pointer-events: none;
+}
